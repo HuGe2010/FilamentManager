@@ -116,7 +116,15 @@ function getStats() {
   const usedWeight = totalOrigWeight - totalWeight;
   const byType={}, byBrand={};
   inv.forEach(i=>{ byType[i.type]=(byType[i.type]||0)+1; byBrand[i.brand]=(byBrand[i.brand]||0)+1; });
-  const lowStock = inv.filter(i=>i.remainingWeight/i.spoolWeight<0.2);
+// 按组计算低库存：同种耗材总量不足20%且不为0时才警告
+const groups = {};
+inv.forEach(i => {
+  const key = `${i.brand}||${i.type}||${i.colorName}||${i.color}`;
+  if (!groups[key]) groups[key] = { brand: i.brand, type: i.type, colorName: i.colorName, color: i.color, remaining: 0, total: 0 };
+  groups[key].remaining += i.remainingWeight;
+  groups[key].total += i.spoolWeight;
+});
+const lowStock = Object.values(groups).filter(g => g.remaining > 0 && g.remaining / g.total < 0.2);
   return { totalSpools, totalWeight, totalOrigWeight, usedWeight, byType, byBrand, lowStock };
 }
 
@@ -158,3 +166,10 @@ function resetAllData() { saveData(JSON.parse(JSON.stringify(DEFAULT_DATA))); }
 function generateId() { return Date.now().toString(36)+Math.random().toString(36).slice(2,6); }
 
 initStorage();
+
+/** 手动追加一条日志（供外部调用） */
+function addLogEntry(entry) {
+  const data = getData();
+  logUsage(data, entry);
+  saveData(data);
+}

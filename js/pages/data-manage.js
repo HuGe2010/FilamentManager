@@ -40,7 +40,7 @@ function renderDataManage(){
         <div class="data-card-desc">清空全部库存和日志，恢复内置默认预设。此操作不可撤销，请先导出备份！</div>
         <button class="btn btn-danger" onclick="handleReset()">重置全部数据</button>
       </div>
-      <div class="data-card" style="background:#fafafa">
+<div class="data-card" style="background:#fafafa; grid-column:1/-1">
         <div class="data-card-title">ℹ 关于数据存储</div>
         <div class="data-card-desc">
           本应用使用浏览器 <code style="font-family:var(--font-mono);background:#e4e4e7;padding:1px 5px;border-radius:3px">localStorage</code> 存储数据。

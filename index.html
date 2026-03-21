@@ -9,7 +9,14 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 </head>
-<body>
+<body><!-- 移动端汉堡菜单按钮 -->
+  <button class="hamburger" id="hamburger" aria-label="菜单">
+    <span></span><span></span><span></span>
+  </button>
+  
+  <!-- 点击遮罩关闭侧边栏 -->
+  <div class="sidebar-mask" id="sidebar-mask"></div>
+
   <nav class="sidebar">
     <div class="sidebar-header">
       <div class="logo">
@@ -48,7 +55,7 @@
         <span class="nav-label">数据管理</span>
       </li>
     </ul>
-    <div class="sidebar-footer">v1.0.0</div>
+    <div class="sidebar-footer">v1.1.0</div>
   </nav>
   <main class="main-content">
     <div id="page-container"></div>
@@ -64,6 +71,35 @@
       <div id="modal-footer" class="modal-footer"></div>
     </div>
   </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const hamburger = document.getElementById('hamburger');
+      const sidebar   = document.getElementById('sidebar');
+      const mask      = document.getElementById('sidebar-mask');
+  
+      function openSidebar() {
+        sidebar.classList.add('open');
+        hamburger.classList.add('open');
+        mask.classList.add('visible');
+      }
+  
+      function closeSidebar() {
+        sidebar.classList.remove('open');
+        hamburger.classList.remove('open');
+        mask.classList.remove('visible');
+      }
+  
+      hamburger.addEventListener('click', () => {
+        sidebar.classList.contains('open') ? closeSidebar() : openSidebar();
+      });
+  
+      mask.addEventListener('click', closeSidebar);
+  
+      document.addEventListener('click', e => {
+        if (e.target.closest('.nav-item')) closeSidebar();
+      });
+    });
+  </script>
   <script src="js/storage.js"></script>
   <script src="js/ui.js"></script>
   <script src="js/pages/dashboard.js"></script>

@@ -63,3 +63,25 @@ const FILAMENT_TYPES=['PLA','PLA+','PETG','PETG+','ABS','ASA','TPU','PA','PA-CF'
 function renderTypeOptions(sel='') {
   return FILAMENT_TYPES.map(t=>`<option value="${t}"${t===sel?' selected':''}>${t}</option>`).join('');
 }
+
+/** 取色器改变 → 同步到 hex 输入框和预览 */
+function syncColorFromPicker(val) {
+  const hex = document.getElementById('pf-color-hex');
+  const prev = document.getElementById('pf-cprev');
+  if (hex) hex.value = val;
+  if (prev) prev.style.background = val;
+}
+
+/** hex 输入框改变 → 同步到取色器和预览 */
+function syncColorFromHex(val) {
+  const clean = val.trim();
+  // 补全 # 前缀
+  const hex = clean.startsWith('#') ? clean : '#' + clean;
+  const picker = document.getElementById('pf-color');
+  const prev = document.getElementById('pf-cprev');
+  // 只有合法的 6 位 hex 才同步取色器
+  if (/^#[0-9a-fA-F]{6}$/.test(hex)) {
+    if (picker) picker.value = hex;
+    if (prev) prev.style.background = hex;
+  }
+}

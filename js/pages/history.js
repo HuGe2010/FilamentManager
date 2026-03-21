@@ -10,10 +10,10 @@ function renderHistory(){
   const totRet=log.filter(l=>l.action==='return').reduce((s,l)=>s+l.amount,0);
   const totAdd=log.filter(l=>l.action==='add').reduce((s,l)=>s+l.amount,0);
 
-  const btns=['','add','use','return'].map(a=>`
+const btns=['','add','use','return','edit'].map(a=>`
     <button class="btn ${histFilterAction===a?'btn-primary':'btn-secondary'} btn-sm"
       onclick="histFilterAction='${a}';renderHistory()">
-      ${a===''?'全部':a==='add'?'入库':a==='use'?'消耗':'退回'}
+      ${a===''?'全部':a==='add'?'入库':a==='use'?'消耗':a==='return'?'退回':'编辑'}
     </button>`).join('');
 
   document.getElementById('page-container').innerHTML=`
@@ -32,7 +32,12 @@ function renderHistory(){
 }
 
 function renderLogItem(item){
-  const am={use:{icon:'↓',cls:'use',label:'消耗',pfx:'-'},return:{icon:'↑',cls:'return',label:'退回',pfx:'+'},add:{icon:'★',cls:'add',label:'入库',pfx:'+'}};
+  const am={
+    use:    {icon:'↓', cls:'use',    label:'消耗', pfx:'-'},
+    return: {icon:'↑', cls:'return', label:'退回', pfx:'+'},
+    add:    {icon:'★', cls:'add',    label:'入库', pfx:'+'},
+    edit:   {icon:'✎', cls:'edit',   label:'编辑', pfx:'' }
+  };
   const a=am[item.action]||am.use;
   return `
     <div class="log-item">
