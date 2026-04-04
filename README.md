@@ -17,10 +17,10 @@ FilamentManager-3D打印耗材管理器
   2.3 修改文件权限
   2.4 使用ssh输入以下指令
 ```bash
-      # cd到文件目录
-      cd filamgr-docker
-      # 首次启动（会自动拉取镜像、建表、写入默认预设）
-      docker compose up -d
+# cd到文件目录
+cd filamgr-docker
+# 首次启动（会自动拉取镜像、建表、写入默认预设）
+docker compose up -d
 ```
 
 # V1.1.0
