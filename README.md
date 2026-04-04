@@ -6,7 +6,10 @@ FilamentManager-3D打印耗材管理器
 后续会添加更多的功能，也欢迎各位提供建议，可通过huge163you@163.com联系我。
 
 # 如何使用-How to use
-  下载代码，直接点击index.html文件即可开始使用。
+  1.下载local版，直接点击index.html文件即可开始使用。
+  2.下载docker版
+    cd [文件地址]
+    docker compose up -d
 
 # V1.1.0
 -仓库耗材合并显示：相同品牌/类型/颜色合并为一组，点击展开查看每卷明细
