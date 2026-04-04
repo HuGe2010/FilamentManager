@@ -8,8 +8,10 @@ FilamentManager-3D打印耗材管理器
 # 如何使用-How to use
   1.下载local版，直接点击index.html文件即可开始使用。
   2.下载docker版
-    cd [文件地址]
-    docker compose up -d
+```bash
+cd filamgr-docker
+# 首次启动（会自动拉取镜像、建表、写入默认预设）
+docker compose up -d
 
 # V1.1.0
 -仓库耗材合并显示：相同品牌/类型/颜色合并为一组，点击展开查看每卷明细
