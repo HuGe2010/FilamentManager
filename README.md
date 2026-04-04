@@ -7,6 +7,7 @@ FilamentManager-3D打印耗材管理器
 
 # 如何使用-How to use
   1.下载local版，直接点击index.html文件即可开始使用。
+
   2.下载docker版
 ```bash
 cd filamgr-docker
