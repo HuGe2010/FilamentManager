@@ -12,7 +12,7 @@ FilamentManager-3D打印耗材管理器
   2.1 解压缩文件
   2.2 修改docker-compose.yml中数据库密码及其他容器的端口号
 ```yaml
-  MYSQL_ROOT_PASSWORD: rootpassword
+MYSQL_ROOT_PASSWORD: rootpassword
 ```
   2.3 修改文件权限
   2.4 使用ssh输入以下指令
